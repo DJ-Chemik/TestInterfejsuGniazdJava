@@ -17,16 +17,21 @@ public class MainActivity extends AppCompatActivity {
     private static final String SERVER_IP = "192.168.0.108";
     private Socket socket; // Utworzenie gniazda
     public Thread watekObslugiSieci;
+    public Runnable clientThread;
 
     private ArrayList<String> indeksy = new ArrayList<>(Arrays.asList("136809", "132336", "131313"));
     private TextView tv_wynik;
 
 
     public void sendIndex1(View v){
-        watekObslugiSieci = new Thread(new ClientThread());
+//        watekObslugiSieci = new Thread(new ClientThread());
+//        watekObslugiSieci.start();
+//        watekObslugiSieci.interrupt();
+
+        clientThread = new ClientThread();
+        watekObslugiSieci = new Thread(clientThread);
         watekObslugiSieci.start();
-        watekObslugiSieci.interrupt();
-    }
+}
 
     public void sendIndex2(View v) {
 
